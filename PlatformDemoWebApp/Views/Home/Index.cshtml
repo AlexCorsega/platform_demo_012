@@ -1,0 +1,62 @@
+﻿@model List<Customer>
+@{
+    ViewData["Title"] = "Customers Page";
+}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            Customers
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Phone number</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <th scope="row">@(i + 1)</th>
+                            <td>@Model[i].Name</td>
+                            <td>@Model[i].PhoneNumber</td>
+                            <td><button id="btnViewOrders" onclick="getOrders('@Model[i].CustomerId')" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#ordersModal">View Orders</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="modal fade" id="ordersModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="ordersModalBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        function getOrders(id) {
+            $.get(`/order/CustomerOrders/${id}`, function (data, status) {
+                console.log(data);
+                if (status == 'success') {
+                    document.getElementById("ordersModalBody").innerHTML = data;
+                }
+            });
+        }
+    </script>
+}
+
