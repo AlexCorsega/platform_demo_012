@@ -1,8 +1,10 @@
 ﻿using ClassLibrary.Entities;
+using PlatformDemoWebApp.DTO;
 
 namespace PlatformDemoWebApp.Repository.CustomerRepository
 {
-    public interface ICustomerRepository : IRepository<Customer>
+    public interface ICustomerRepository : IBaseRepository<Customer>
     {
+        Task<List<CustomerDTO>> GetAllWithTotalOrders();
     }
 }

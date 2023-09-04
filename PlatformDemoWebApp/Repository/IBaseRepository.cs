@@ -1,6 +1,6 @@
 ﻿namespace PlatformDemoWebApp.Repository
 {
-    public interface IRepository<TEntity> where TEntity : class
+    public interface IBaseRepository<TEntity> where TEntity : class
     {
         Task AddAsync(TEntity entity);
         Task<TEntity> FindAsync(int id);

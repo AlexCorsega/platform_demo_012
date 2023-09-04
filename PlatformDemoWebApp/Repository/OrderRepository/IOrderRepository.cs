@@ -2,7 +2,7 @@
 
 namespace PlatformDemoWebApp.Repository.OrderRepository
 {
-    public interface IOrderRepository : IRepository<Order>
+    public interface IOrderRepository : IBaseRepository<Order>
     {
         Task<List<Order>> FindCustomerOrdersAsync(int customerId);
     }

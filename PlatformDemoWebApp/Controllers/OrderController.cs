@@ -12,6 +12,11 @@ namespace PlatformDemoWebApp.Controllers
         {
             this._orderRepository = orderRepository;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns>Returns the partial orders table</returns>
         [HttpGet("[action]/{customerId}")]
         public async Task<IActionResult> CustomerOrders(int customerId)
         {

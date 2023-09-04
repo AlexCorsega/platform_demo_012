@@ -20,7 +20,7 @@ namespace PlatformDemoWebApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _customerRepository.GetAllAsync());
+            return View(await _customerRepository.GetAllWithTotalOrders());
         }
 
         public IActionResult Privacy()

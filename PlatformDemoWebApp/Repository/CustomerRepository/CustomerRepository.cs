@@ -1,6 +1,7 @@
 ﻿using ClassLibrary;
 using ClassLibrary.Entities;
 using Microsoft.EntityFrameworkCore;
+using PlatformDemoWebApp.DTO;
 
 namespace PlatformDemoWebApp.Repository.CustomerRepository;
 /// <summary>
@@ -65,5 +66,21 @@ public class CustomerRepository : ICustomerRepository
             .Where(s => s.CustomerId.Equals(entity.CustomerId))
             .ExecuteUpdateAsync(p => p.SetProperty(b => entity.Name,
                                 b => b.PhoneNumber));
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>All the customers with total orders</returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public async Task<List<CustomerDTO>> GetAllWithTotalOrders()
+    {
+        return await _dbContext.Customer.Select(s=>new CustomerDTO()
+        {
+            CustomerId = s.CustomerId,
+            Name = s.Name,
+            PhoneNumber = s.PhoneNumber,
+            TotalOrders = s.Orders.Sum(o=>o.Amount)
+        }).ToListAsync();
     }
 }

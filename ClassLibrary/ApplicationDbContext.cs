@@ -22,7 +22,10 @@ namespace ClassLibrary
             GenerateCustomers(modelBuilder); //Comment this when seed is finish
             base.OnModelCreating(modelBuilder);
         }
-        //Seeder function
+        /// <summary>
+        /// Generate customers for the seeder
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         private void GenerateCustomers(ModelBuilder modelBuilder)
         {
             string[] names = new string[]
@@ -47,36 +50,45 @@ namespace ClassLibrary
             {
                 int customerId = i + 1;
                 modelBuilder.Entity<Customer>(options =>
-                        {
-                            options.HasData(
-                                  new Customer()
-                                  {
-                                      CustomerId = customerId,
-                                      Name = names[i],
-                                      PhoneNumber = GenerateRandomPhoneNumber(),//Add Orders per customer
-                                  }
-                             );
-                            options.OwnsMany(d => d.Orders).HasData(GenerateOrders(customerId));
-                        });
+                {
+                    options.HasData(
+                             new Customer()
+                             {
+                                 CustomerId = customerId,
+                                 Name = names[i],
+                                 PhoneNumber = GenerateRandomPhoneNumber(),
+                             }
+                             ) ;
+                });
+                modelBuilder.Entity<Order>().HasData(GenerateOrders(customerId));
             }
         }
+        /// <summary>
+        /// Generate an orders
+        /// </summary>
+        /// <param name="customerId">customerId for orders</param>
+        /// <returns>List of orders</returns>
+        private int _orderId = 1;
         private List<Order> GenerateOrders(int customerId)
         {
             var random = new Random();
             int ordersLength = random.Next(0, 5);
             var order = new List<Order>();
-            for (int i = 0; i < ordersLength; i++)
+            for (int i = 0; i < ordersLength; i++,_orderId++)
             {
                 order.Add(new Order()
                 {
-                    OrderId = random.Next(1, 1000),
+                    OrderId = _orderId,
                     CustomerId = customerId,
                     Amount = random.Next(1000, 500000),
                 });
             }
             return order;
         }
-        //Generate random Philippines phone number
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <returns>Random phone number based on the Philippines</returns>
         private string GenerateRandomPhoneNumber()
         {
             var random = new Random();

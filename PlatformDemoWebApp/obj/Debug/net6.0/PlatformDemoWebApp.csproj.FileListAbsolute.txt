@@ -399,3 +399,4 @@ C:\Github\PlatformDemo\PlatformDemoWebApp\obj\Debug\net6.0\refint\PlatformDemoWe
 C:\Github\PlatformDemo\PlatformDemoWebApp\obj\Debug\net6.0\PlatformDemoWebApp.pdb
 C:\Github\PlatformDemo\PlatformDemoWebApp\obj\Debug\net6.0\PlatformDemoWebApp.genruntimeconfig.cache
 C:\Github\PlatformDemo\PlatformDemoWebApp\obj\Debug\net6.0\ref\PlatformDemoWebApp.dll
+C:\Github\PlatformDemo\PlatformDemoWebApp\obj\Debug\net6.0\PlatformDemoWebApp.sourcelink.json
