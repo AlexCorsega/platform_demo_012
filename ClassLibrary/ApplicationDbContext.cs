@@ -49,17 +49,14 @@ namespace ClassLibrary
             for (int i = 0; i < names.Length; i++)
             {
                 int customerId = i + 1;
-                modelBuilder.Entity<Customer>(options =>
-                {
-                    options.HasData(
+                modelBuilder.Entity<Customer>().HasData(
                              new Customer()
                              {
                                  CustomerId = customerId,
                                  Name = names[i],
                                  PhoneNumber = GenerateRandomPhoneNumber(),
                              }
-                             ) ;
-                });
+                             );
                 modelBuilder.Entity<Order>().HasData(GenerateOrders(customerId));
             }
         }
@@ -74,7 +71,7 @@ namespace ClassLibrary
             var random = new Random();
             int ordersLength = random.Next(0, 5);
             var order = new List<Order>();
-            for (int i = 0; i < ordersLength; i++,_orderId++)
+            for (int i = 0; i < ordersLength; i++, _orderId++)
             {
                 order.Add(new Order()
                 {
@@ -85,10 +82,10 @@ namespace ClassLibrary
             }
             return order;
         }
-       /// <summary>
-       /// 
-       /// </summary>
-       /// <returns>Random phone number based on the Philippines</returns>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Random phone number based on the Philippines</returns>
         private string GenerateRandomPhoneNumber()
         {
             var random = new Random();
